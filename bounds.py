@@ -39,7 +39,7 @@ py = pxy + pxpy
 incompatible = greater(pxy, pyx) or greater(pyx, pxy + pxp) or greater(pxpy, pyxp) or greater(pyxp, pxpy + px)
 if incompatible:
     st.image('red-alert-icon.png', width = 100)
-    st.header(':fire: Danger: Experimental & Observational Probabilities Incompatible! :fire:')
+    st.header(':fire: Impossible: Experimental & Observational Probabilities Incompatible! :fire:')
 
 # lb and ub are lower and upper bounds of P(benefit)
 lb = max(0, pyx - pyxp, py - pyxp, pyx - py)
