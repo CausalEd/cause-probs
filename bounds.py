@@ -12,13 +12,13 @@ st.header("Bounds on Probabilities of Causation")
 col1, col2 = st.columns(2)
 
 with col1:
+    exp_header = st.empty()
     # pyx = P(yₓ), pyxp = P(yₓ')
-    st.subheader('Experimental Probabilities')
     pyx = st.slider('$P(y_x)$', 0., 1., 0.5, step=0.01)
     pyxp = st.slider('$P(y_{x\'})$', 0., 1., 0.5, step=0.01)
 with col2:
+    obs_header = st.empty()
     # px = P(x), pycx = P(y|x), pycxp = P(y|x')
-    st.subheader('Observational Probabilities')
     px = st.slider('$P(x)$', 0., 1., 0.5, step=0.01)
     pycx = st.slider('$P(y|x)$', 0., 1., 0.5, step=0.01)
     pycxp = st.slider('$P(y|{x\'})$', 0., 1., 0.5, step=0.01)
@@ -40,6 +40,8 @@ incompatible = greater(pxy, pyx) or greater(pyx, pxy + pxp) or greater(pxpy, pyx
 if incompatible:
     st.image('red-alert-icon.png', width = 100)
     st.header(':fire: Impossible: Experimental & Observational Data Incompatible! :fire:')
+exp_header.subheader(f'Experimental Probabilities{" ⚠" if incompatible else ""}')
+obs_header.subheader(f'Observational Probabilities{" ⚠" if incompatible else ""}')
 
 # lb and ub are lower and upper bounds of P(benefit)
 lb = max(0, pyx - pyxp, py - pyxp, pyx - py)
